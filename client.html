@@ -30,7 +30,7 @@
 
   <script>
     // Public address of the AWS Load Balancer (get this from the Fjord-App CLI output)
-    const host = "http://fjord-fjord-QTMUFOQ5C9PB-757494948.us-east-1.elb.amazonaws.com"
+    const host = "http://fjord-fjord-QTMUFOQ5C9PB-757494948.us-east-1.elb.amazonaws.com";
     
     // Name of the topic you want this client to listen to; could also be hard-coded into the url below
     const topic = "orders";
@@ -45,16 +45,16 @@
     const url = `${host}/stream/${topic}/${userID}/${token}`; // (N.B. omit /token if JWT is not used)
     const events = new EventSource(url);
 
-    const table = document.getElementById("table")
+    const table = document.getElementById("table");
 
     events.onmessage = e => {
       const record = JSON.parse(e.data);
       if (record.value) {
-        const row = table.insertRow(0)       // first row (i.e. newest record added at top of table)
-        const col1 = row.insertCell(0)
-        const col2 = row.insertCell(1)
-        const col3 = row.insertCell(2)
-        const col4 = row.insertCell(3)
+        const row = table.insertRow(0);      // first row (i.e. newest record added at top of table)
+        const col1 = row.insertCell(0);
+        const col2 = row.insertCell(1);
+        const col3 = row.insertCell(2);
+        const col4 = row.insertCell(3);
         col1.appendChild(document.createTextNode(record.topic));
         col2.appendChild(document.createTextNode(record.timestamp));
         col3.appendChild(document.createTextNode(record.key));
