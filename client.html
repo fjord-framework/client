@@ -32,7 +32,7 @@
 
     const host = "http://fjord-fjord-QTMUFOQ5C9PB-757494948.us-east-1.elb.amazonaws.com"
     
-    // Name of the topic you want to listen to; could be predefined and hard-coded into the url below
+    // Name of the topic you want to listen to; could also be hard-coded into the url below
     const topic = "orders";
     
     // This would be a unique userID from the currently logged in user on your server
@@ -42,7 +42,7 @@
     // Ideally, save this token on & pull from localstorage
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIzZHU1azdldWUyMmtrajR6aTNlYyIsImV4cCI6MTYyODEwNDM1MiwiaWF0IjoxNjI4MDk4MzUyfQ.VVTKv00Hg5LTjDS2pSUBIof0hM3EP8aFeMmOYZ21hag";
 
-    const url = `${host}/stream/${topic}/${userID}/${token}`; // (omit /token if JWT is not used)
+    const url = `${host}/stream/${topic}/${userID}/${token}`; // (N.B. omit /token if JWT is not used)
     const events = new EventSource(url);
 
     const table = document.getElementById("table")
@@ -50,7 +50,7 @@
     events.onmessage = e => {
       const record = JSON.parse(e.data);
       if (record.value) {
-        const row = table.insertRow(0)       // first row (newest record added at top of table)
+        const row = table.insertRow(0)       // first row (i.e. newest record added at top of table)
         const col1 = row.insertCell(0)
         const col2 = row.insertCell(1)
         const col3 = row.insertCell(2)
